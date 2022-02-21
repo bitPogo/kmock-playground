@@ -8,7 +8,7 @@ package tech.antibytes.kmock.example.dependency
 
 object Dependency {
     val gradle = GradlePlugin
-    val antiBytes = AntiBytes
+    val antibytes = AntiBytes
 
     object AntiBytes {
         val gradle = Gradle
@@ -21,6 +21,7 @@ object Dependency {
         val test = Test
 
         object Test {
+            val android = AndroidTest
             val jvm = JvmTest
             val js = JsTest
 
@@ -35,7 +36,6 @@ object Dependency {
             val ktor = "tech.antibytes.test-utils-kmp:test-utils-ktor-jvm:${Version.antibytes.test}"
             val gradle = "tech.antibytes.gradle-plugins:antibytes-gradle-test-utils-jvm:${Version.gradle.antibytes}"
             val kmock = "tech.antibytes.kmock:kmock-jvm:${Version.antibytes.kmock}"
-
         }
 
         val js = JsTest
@@ -48,6 +48,18 @@ object Dependency {
             val ktor = "tech.antibytes.test-utils-kmp:test-utils-ktor-js:${Version.antibytes.test}"
             val gradle = "tech.antibytes.gradle-plugins:antibytes-gradle-test-utils-js:${Version.gradle.antibytes}"
             val kmock = "tech.antibytes.kmock:kmock-js:${Version.antibytes.kmock}"
+        }
+
+        val android = AndroidTest
+
+        object AndroidTest {
+            val annotations = "tech.antibytes.test-utils-kmp:test-utils-annotations-android:${Version.antibytes.test}"
+            val core = "tech.antibytes.test-utils-kmp:test-utils-android:${Version.antibytes.test}"
+            val fixture = "tech.antibytes.test-utils-kmp:test-utils-fixture-android:${Version.antibytes.test}"
+            val coroutine = "tech.antibytes.test-utils-kmp:test-utils-coroutine-android:${Version.antibytes.test}"
+            val ktor = "tech.antibytes.test-utils-kmp:test-utils-ktor-android:${Version.antibytes.test}"
+            val gradle = "tech.antibytes.gradle-plugins:antibytes-gradle-test-utils-android:${Version.gradle.antibytes}"
+            val kmock = "tech.antibytes.kmock:kmock-android:${Version.antibytes.kmock}"
         }
     }
 }

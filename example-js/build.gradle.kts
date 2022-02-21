@@ -28,9 +28,9 @@ dependencies {
     implementation(Dependency.multiplatform.stately.concurrency)
     implementation(Dependency.js.nodejs)
 
-    testImplementation(LocalDependency.antiBytes.test.js.core)
-    testImplementation(LocalDependency.antiBytes.test.js.coroutine)
-    testImplementation(LocalDependency.antiBytes.test.js.fixture)
-    testImplementation(LocalDependency.antiBytes.test.js.kmock)
+    testImplementation(LocalDependency.antibytes.test.js.core)
+    testImplementation(LocalDependency.antibytes.test.js.coroutine)
+    testImplementation(LocalDependency.antibytes.test.js.fixture)
+    testImplementation(LocalDependency.antibytes.test.js.kmock)
     testImplementation(Dependency.js.test.js)
 }
