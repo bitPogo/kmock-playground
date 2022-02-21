@@ -14,11 +14,22 @@ object Version {
         /**
          * [AnitBytes GradlePlugins](https://github.com/bitPogo/gradle-plugins)
          */
-        const val antibytes = "5b2583f"
+        const val antibytes = "bb22160"
 
         /**
          * [Spotless](https://plugins.gradle.org/plugin/com.diffplug.gradle.spotless)
          */
         const val spotless = "6.3.0"
+    }
+
+    val antibytes = Antibytes
+
+    object Antibytes {
+        val test = "8b81c5a"
+
+        /**
+         * [KMock](https://github.com/bitPogo/kmock)
+         */
+        const val kmock = "d3f31b1-fix-single-sources-SNAPSHOT"
     }
 }

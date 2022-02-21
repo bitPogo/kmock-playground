@@ -18,7 +18,7 @@ plugins {
 }
 
 include(
-    //":kmock-",
+    ":example-jvm",
 )
 
 buildCache {
