@@ -19,6 +19,7 @@ plugins {
 
 include(
     ":example-jvm",
+    ":example-js",
 )
 
 buildCache {
