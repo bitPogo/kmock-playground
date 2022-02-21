@@ -20,7 +20,8 @@ plugins {
 include(
     ":example-jvm",
     ":example-js",
-    ":example-android-library"
+    ":example-android-library",
+    ":example-android-application"
 )
 
 buildCache {
