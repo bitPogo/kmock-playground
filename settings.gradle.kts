@@ -18,10 +18,11 @@ plugins {
 }
 
 include(
-    ":example-jvm",
-    ":example-js",
     ":example-android-library",
-    ":example-android-application"
+    ":example-android-application",
+    ":example-js",
+    ":example-jvm",
+    ":example-kmp",
 )
 
 buildCache {

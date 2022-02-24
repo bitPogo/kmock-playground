@@ -30,6 +30,6 @@ object Version {
         /**
          * [KMock](https://github.com/bitPogo/kmock)
          */
-        const val kmock = "826bd36-fix-single-sources-SNAPSHOT"
+        const val kmock = "70b940a-fix-single-sources-SNAPSHOT"
     }
 }
