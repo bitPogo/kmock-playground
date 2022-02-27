@@ -18,7 +18,11 @@ plugins {
 }
 
 include(
-    //":kmock-",
+    ":example-android-library",
+    ":example-android-application",
+    ":example-js",
+    ":example-jvm",
+    ":example-kmp",
 )
 
 buildCache {
