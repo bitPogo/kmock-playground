@@ -6,6 +6,8 @@
 
 import tech.antibytes.gradle.dependency.Dependency
 import tech.antibytes.kmock.example.dependency.Dependency as LocalDependency
+import tech.antibytes.gradle.kmock.KMockExtension
+import com.google.devtools.ksp.gradle.KspExtension
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
@@ -140,8 +142,6 @@ kotlin {
             }
         }
         val linuxX64Test by getting {
-            kotlin.srcDir("src-gen/generated/ksp/linuxX64Test")
-
             dependencies {
                 dependsOn(otherTest)
             }
@@ -167,3 +167,7 @@ kotlin {
 }
 
 plugins.apply("tech.antibytes.kmock.kmock-gradle")
+
+project.extensions.configure<KMockExtension>("kmock") {
+    rootPackage = "tech.antibytes.kmock.example"
+}

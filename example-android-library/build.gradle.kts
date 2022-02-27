@@ -18,6 +18,23 @@ plugins {
     id("tech.antibytes.kmock.kmock-gradle")
 }
 
+kmock {
+    rootPackage = "tech.antibytes.kmock.example"
+}
+
+/*
+Note: Do not use while running debug and release together aka check/test/build
+android {
+    sourceSets {
+        getByName("test") {
+            java.srcDirs(
+                "${project.buildDir.absolutePath.trimEnd('/')}/generated/ksp/debugUnitTest", // Just to make the IDE happy
+            )
+        }
+    }
+}
+*/
+
 dependencies {
     implementation(Dependency.multiplatform.kotlin.jdk8)
     implementation(Dependency.multiplatform.coroutines.common)

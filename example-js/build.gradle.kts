@@ -6,6 +6,7 @@
 
 import tech.antibytes.gradle.dependency.Dependency
 import tech.antibytes.kmock.example.dependency.Dependency as LocalDependency
+import tech.antibytes.gradle.kmock.KMockExtension
 
 plugins {
     id("org.jetbrains.kotlin.js")
@@ -21,6 +22,10 @@ kotlin {
 }
 
 plugins.apply("tech.antibytes.kmock.kmock-gradle")
+
+project.extensions.configure(KMockExtension::class.java) {
+    rootPackage = "tech.antibytes.kmock.example"
+}
 
 dependencies {
     implementation(Dependency.multiplatform.kotlin.js)

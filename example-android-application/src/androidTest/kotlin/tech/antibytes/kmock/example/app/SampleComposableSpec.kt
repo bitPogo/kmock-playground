@@ -15,22 +15,23 @@ import kotlinx.coroutines.flow.update
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import tech.antibytes.kmock.MagicStub
+import tech.antibytes.kmock.Mock
+import tech.antibytes.kmock.example.kmock
 import tech.antibytes.util.test.fixture.fixture
 import tech.antibytes.util.test.fixture.kotlinFixture
 
-@MagicStub(AppContract.SampleViewModel::class)
+@Mock(AppContract.SampleViewModel::class)
 class SampleComposableSpec {
     @get:Rule
     val composeTestRule = createComposeRule()
     private val flow = MutableStateFlow("")
-    private val viewModel = SampleViewModelStub()
+    private val viewModel: SampleViewModelMock = kmock()
     private val fixture = kotlinFixture()
 
     @Before
     fun setUp() {
         flow.update { "" }
-        viewModel.clear()
+        viewModel._clearMock()
     }
 
     @Test
