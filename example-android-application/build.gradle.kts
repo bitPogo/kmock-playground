@@ -19,6 +19,10 @@ plugins {
     id("tech.antibytes.kmock.kmock-gradle")
 }
 
+kmock {
+    rootPackage = "tech.antibytes.kmock.example"
+}
+
 android {
     defaultConfig {
         applicationId = "tech.antibytes.kmock.example.app"
@@ -34,13 +38,22 @@ android {
         jvmTarget = "1.8"
     }
 
+    /*
+    Note: Do not use while running debug and release together aka check/test/build
     sourceSets {
         getByName("androidTest") {
             java.srcDirs(
                 "${project.buildDir.absolutePath.trimEnd('/')}/generated/ksp/debugAndroidTest", // Just to make the IDE happy
             )
         }
+
+        getByName("test") {
+            java.srcDirs(
+                "${project.buildDir.absolutePath.trimEnd('/')}/generated/ksp/debugUnitTest", // Just to make the IDE happy
+            )
+        }
     }
+     */
 
     buildFeatures {
         compose = true

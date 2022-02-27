@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.StateFlow
 fun SampleComposablePreview() {
     val flow = MutableStateFlow("generic text")
 
-
     SampleComposable(viewModel = ViewModelStub(flow))
 }
 
