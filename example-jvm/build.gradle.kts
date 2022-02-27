@@ -17,11 +17,6 @@ kmock {
     rootPackage = "tech.antibytes.kmock.example"
 }
 
-ksp {
-    arg("rootPackage", "tech.antibytes.kmock.example")
-    arg("isKmp", "false")
-}
-
 dependencies {
     implementation(Dependency.multiplatform.kotlin.jdk8)
     implementation(Dependency.multiplatform.coroutines.common)

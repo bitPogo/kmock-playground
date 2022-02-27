@@ -10,8 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import tech.antibytes.kmock.Mock
 import tech.antibytes.kmock.example.contract.ExampleContract
 import tech.antibytes.kmock.example.contract.ExampleContract.SampleDomainObject
@@ -54,7 +54,7 @@ class SampleControllerAutoStubSpec {
     private var remote: SampleRemoteRepositoryMock = kmock(verifier)
     private var domainObject: SampleDomainObjectMock = kmock(verifier)
 
-    @Before
+    @BeforeEach
     fun setUp() {
         verifier.clear()
         local._clearMock()
