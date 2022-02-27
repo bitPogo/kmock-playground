@@ -19,7 +19,9 @@ import tech.antibytes.kmock.example.contract.ExampleContract.SampleRemoteReposit
 import tech.antibytes.kmock.example.contract.SampleDomainObjectMock
 import tech.antibytes.kmock.example.contract.SampleLocalRepositoryMock
 import tech.antibytes.kmock.example.contract.SampleRemoteRepositoryMock
+import tech.antibytes.kmock.verification.NonfreezingVerifier
 import tech.antibytes.kmock.verification.Verifier
+import tech.antibytes.kmock.verification.hasBeenCalled
 import tech.antibytes.kmock.verification.hasBeenCalledWith
 import tech.antibytes.kmock.verification.hasBeenCalledWithout
 import tech.antibytes.kmock.verification.hasBeenStrictlyCalledWith
@@ -158,4 +160,52 @@ class SampleControllerAutoStubSpec {
             }
         }
     }
+
+    @Test
+    @JsName("fn3")
+    fun `Given find it fetches blocking a DomainObjects`() {
+        // Given
+        val idOrg = fixture.fixture<String>()
+        val instance = DomainObject("test", 21)
+        val verifier = NonfreezingVerifier()
+        val local: SampleLocalRepositoryMock = kmock(verifier, relaxed = true, freeze = false)
+        val remote: SampleRemoteRepositoryMock = kmock(verifier, relaxed = true, freeze = false)
+
+        val domainObject: SampleDomainObjectMock = kspy(
+            instance,
+            verifier,
+            freeze = false
+        )
+
+        remote._find.returnValue = domainObject
+        local._contains.sideEffect = { true }
+        local._fetch.returnValue = domainObject
+
+        // When
+        val controller = SampleController(local, remote)
+
+        // When
+        controller.findBlocking(idOrg)
+
+        verify(exactly = 1) { local._contains.hasBeenStrictlyCalledWith(idOrg) }
+        verify(exactly = 1) { local._fetch.hasBeenCalled() }
+        verify(exactly = 1) { remote._find.hasBeenStrictlyCalledWith(idOrg) }
+
+        verifier.verifyStrictOrder {
+            local._contains.hasBeenStrictlyCalledWith(idOrg)
+            remote._find.hasBeenStrictlyCalledWith(idOrg)
+            domainObject._id.wasGotten()
+            local._fetch.hasBeenCalled()
+            domainObject._id.wasSet()
+        }
+
+        verifier.verifyOrder {
+            local._contains.hasBeenCalledWithout("abc")
+        }
+    }
 }
+
+private class DomainObject(
+    override var id: String,
+    override val value: Int
+) : SampleDomainObject
