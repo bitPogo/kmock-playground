@@ -23,7 +23,7 @@ kotlin {
 
 plugins.apply("tech.antibytes.kmock.kmock-gradle")
 
-project.extensions.configure(KMockExtension::class.java) {
+project.extensions.configure<KMockExtension>(KMockExtension::class.java) {
     rootPackage = "tech.antibytes.kmock.example"
 }
 
