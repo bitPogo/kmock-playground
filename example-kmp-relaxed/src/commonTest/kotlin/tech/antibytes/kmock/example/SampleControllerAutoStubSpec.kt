@@ -200,7 +200,7 @@ class SampleControllerAutoStubSpec {
         }
 
         verifier.verifyOrder {
-            local._contains.hasBeenCalledWithout("abc")
+            local._contains.hasBeenCalledWithout("abcx")
         }
     }
 

@@ -23,6 +23,7 @@ include(
     ":example-js",
     ":example-jvm",
     ":example-kmp",
+    ":example-kmp-relaxed",
 )
 
 buildCache {
@@ -33,4 +34,4 @@ buildCache {
     }
 }
 
-rootProject.name = "kmock-playground-dependency"
+rootProject.name = "kmock-playground"

@@ -4,23 +4,27 @@
  * Use of this source code is governed by Apache v2.0
  */
 
-package tech.antibytes.kmock.example
+package tech.antibytes.kmock.example.contract
 
 import co.touchlab.stately.concurrency.AtomicReference
+import kotlinx.cinterop.allocArrayOf
+import kotlinx.cinterop.memScoped
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import tech.antibytes.kmock.MockCommon
-import tech.antibytes.kmock.example.contract.ExampleContract
+import platform.Foundation.NSData
+import platform.Foundation.create
+import tech.antibytes.kmock.MockShared
+import tech.antibytes.kmock.example.SampleController
 import tech.antibytes.kmock.example.contract.ExampleContract.SampleDomainObject
 import tech.antibytes.kmock.example.contract.ExampleContract.SampleLocalRepository
 import tech.antibytes.kmock.example.contract.ExampleContract.SampleRemoteRepository
-import tech.antibytes.kmock.example.contract.SampleDomainObjectMock
-import tech.antibytes.kmock.example.contract.SampleLocalRepositoryMock
-import tech.antibytes.kmock.example.contract.SampleRemoteRepositoryMock
+import tech.antibytes.kmock.example.kmock
+import tech.antibytes.kmock.example.kspy
 import tech.antibytes.kmock.verification.NonfreezingVerifier
 import tech.antibytes.kmock.verification.Verifier
+import tech.antibytes.kmock.verification.assertHasBeenCalled
 import tech.antibytes.kmock.verification.hasBeenCalled
 import tech.antibytes.kmock.verification.hasBeenCalledWith
 import tech.antibytes.kmock.verification.hasBeenCalledWithout
@@ -41,17 +45,18 @@ import tech.antibytes.util.test.fixture.kotlinFixture
 import tech.antibytes.util.test.fixture.listFixture
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import kotlin.js.JsName
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-@MockCommon(
+@MockShared(
+    "iosTest",
     SampleRemoteRepository::class,
     SampleLocalRepository::class,
     SampleDomainObject::class,
-    ExampleContract.DecoderFactory::class
+    ExampleContract.DecoderFactory::class,
+    IosContract.IosThing::class
 )
-class SampleControllerAutoStubSpec {
+class SampleControllerAutoIosStubSpec {
     private val fixture = kotlinFixture()
     private var verifier = Verifier()
     private var local: SampleLocalRepositoryMock = kmock(verifier)
@@ -68,13 +73,11 @@ class SampleControllerAutoStubSpec {
     }
 
     @Test
-    @JsName("fn0")
     fun `It fulfils SampleController`() {
         SampleController(local, remote) fulfils ExampleContract.SampleController::class
     }
 
     @Test
-    @JsName("fn1")
     fun `Given fetchAndStore it fetches and stores DomainObjects`(): AsyncTestReturnValue {
         // Given
         val url = fixture.fixture<String>()
@@ -116,7 +119,6 @@ class SampleControllerAutoStubSpec {
     }
 
     @Test
-    @JsName("fn2")
     fun `Given find it fetches a DomainObjects`(): AsyncTestReturnValue {
         // Given
         val idOrg = fixture.fixture<String>()
@@ -162,7 +164,6 @@ class SampleControllerAutoStubSpec {
     }
 
     @Test
-    @JsName("fn3")
     fun `Given find it fetches blocking a DomainObjects`() {
         // Given
         val idOrg = fixture.fixture<String>()
@@ -202,6 +203,25 @@ class SampleControllerAutoStubSpec {
         verifier.verifyOrder {
             local._contains.hasBeenCalledWithout("abc")
         }
+    }
+
+    @Test
+    fun `Given a arbitrary SourceSetThing it is mocked`() {
+        // Given
+        val bytes = ByteArray(23)
+        val iosThing = kmock<IosThingMock>(relaxUnitFun = true)
+        iosThing._doSomething.returnValue = memScoped {
+            NSData.create(
+                bytes = allocArrayOf(bytes),
+                length = bytes.size.toULong()
+            )
+        }
+
+        // When
+        iosThing.doSomething()
+
+        // Then
+        iosThing._doSomething.assertHasBeenCalled(1)
     }
 
     private class DomainObject(

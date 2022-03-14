@@ -25,11 +25,11 @@ object Version {
     val antibytes = Antibytes
 
     object Antibytes {
-        val test = "c3e5acf"
+        const val test = "c3e5acf"
 
         /**
          * [KMock](https://github.com/bitPogo/kmock)
          */
-        const val kmock = "c560d77"
+        const val kmock = "cba59bc"
     }
 }
