@@ -10,4 +10,8 @@ interface ConcurrentContract {
     interface ConcurrentThing {
         fun doSomething()
     }
+
+    interface SomethingGenericConcurrent<T> {
+        fun doSomething(): T
+    }
 }

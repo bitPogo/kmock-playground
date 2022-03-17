@@ -54,7 +54,8 @@ import kotlin.test.Test
     SampleLocalRepository::class,
     SampleDomainObject::class,
     ExampleContract.DecoderFactory::class,
-    IosContract.IosThing::class
+    IosContract.IosThing::class,
+    ConcurrentContract.SomethingGenericConcurrent::class
 )
 class SampleControllerAutoIosStubSpec {
     private val fixture = kotlinFixture()

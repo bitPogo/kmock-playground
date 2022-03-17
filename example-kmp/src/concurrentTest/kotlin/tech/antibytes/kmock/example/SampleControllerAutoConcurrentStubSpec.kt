@@ -53,7 +53,8 @@ import kotlin.test.Test
     SampleLocalRepository::class,
     SampleDomainObject::class,
     ExampleContract.DecoderFactory::class,
-    ConcurrentContract.ConcurrentThing::class
+    ConcurrentContract.ConcurrentThing::class,
+    ConcurrentContract.SomethingGenericConcurrent::class
 )
 class SampleControllerAutoConcurrentStubSpec {
     private val fixture = kotlinFixture()

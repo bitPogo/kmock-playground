@@ -30,6 +30,6 @@ object Version {
         /**
          * [KMock](https://github.com/bitPogo/kmock)
          */
-        const val kmock = "cba59bc"
+        const val kmock = "54a39ff"
     }
 }
