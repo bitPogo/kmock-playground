@@ -186,4 +186,8 @@ plugins.apply("tech.antibytes.kmock.kmock-gradle")
 
 project.extensions.configure<KMockExtension>("kmock") {
     rootPackage = "tech.antibytes.kmock.example"
+    aliasNameMapping = mapOf(
+        "tech.antibytes.kmock.example.contract.ConcurrentCollisionContract.ConcurrentThing" to "Alias",
+        "tech.antibytes.kmock.example.contract.ConcurrentCollisionContract.SomethingGenericConcurrent" to "AliasGeneric"
+    )
 }
