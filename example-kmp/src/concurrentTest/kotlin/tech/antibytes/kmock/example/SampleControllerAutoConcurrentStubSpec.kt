@@ -12,6 +12,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import tech.antibytes.kmock.MockShared
+import tech.antibytes.kmock.example.contract.AliasMock
+import tech.antibytes.kmock.example.contract.ConcurrentCollisionContract
 import tech.antibytes.kmock.example.contract.ConcurrentContract
 import tech.antibytes.kmock.example.contract.ConcurrentThingMock
 import tech.antibytes.kmock.example.contract.ExampleContract
@@ -21,6 +23,7 @@ import tech.antibytes.kmock.example.contract.ExampleContract.SampleRemoteReposit
 import tech.antibytes.kmock.example.contract.SampleDomainObjectMock
 import tech.antibytes.kmock.example.contract.SampleLocalRepositoryMock
 import tech.antibytes.kmock.example.contract.SampleRemoteRepositoryMock
+import tech.antibytes.kmock.example.contract.SomethingGenericConcurrentMock
 import tech.antibytes.kmock.verification.NonfreezingVerifier
 import tech.antibytes.kmock.verification.Verifier
 import tech.antibytes.kmock.verification.assertHasBeenCalled
@@ -54,7 +57,9 @@ import kotlin.test.Test
     SampleDomainObject::class,
     ExampleContract.DecoderFactory::class,
     ConcurrentContract.ConcurrentThing::class,
-    ConcurrentContract.SomethingGenericConcurrent::class
+    ConcurrentCollisionContract.ConcurrentThing::class,
+    ConcurrentContract.SomethingGenericConcurrent::class,
+    ConcurrentCollisionContract.SomethingGenericConcurrent::class,
 )
 class SampleControllerAutoConcurrentStubSpec {
     private val fixture = kotlinFixture()
@@ -209,6 +214,35 @@ class SampleControllerAutoConcurrentStubSpec {
     fun `Given a arbitrary SourceSetThing it is mocked`() {
         // Given
         val concurrentThing = kmock<ConcurrentThingMock>(relaxUnitFun = true)
+
+        // When
+        concurrentThing.doSomething()
+
+        // Then
+        concurrentThing._doSomething.assertHasBeenCalled(1)
+    }
+
+    @Test
+    fun `Given a arbitrary SourceSetThing with an SourceSet it is mocked`() {
+        // Given
+        val concurrentThing = kmock<AliasMock>(relaxUnitFun = true)
+
+        // When
+        concurrentThing.doSomething()
+
+        // Then
+        concurrentThing._doSomething.assertHasBeenCalled(1)
+    }
+
+    @Test
+    fun `Given a arbitrary GenericThing it is mocked`() {
+        // Given
+        val concurrentThing: SomethingGenericConcurrentMock<Int> = kmock(
+            templateType = ConcurrentContract.SomethingGenericConcurrent::class,
+            relaxUnitFun = true,
+        )
+
+        concurrentThing._doSomething.returnValue = 23
 
         // When
         concurrentThing.doSomething()

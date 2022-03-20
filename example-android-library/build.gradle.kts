@@ -13,6 +13,7 @@ plugins {
     // Android
     id("com.android.library")
 
+    // Contains the major part of the Android Setup
     id("tech.antibytes.gradle.configuration")
 
     id("tech.antibytes.kmock.kmock-gradle")

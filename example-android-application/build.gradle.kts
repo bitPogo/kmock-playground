@@ -14,6 +14,7 @@ plugins {
     // Android
     id("com.android.application")
 
+    // Contains the major part of the Android Setup
     id("tech.antibytes.gradle.configuration")
 
     id("tech.antibytes.kmock.kmock-gradle")
@@ -53,7 +54,7 @@ android {
             )
         }
     }
-     */
+    */
 
     buildFeatures {
         compose = true
