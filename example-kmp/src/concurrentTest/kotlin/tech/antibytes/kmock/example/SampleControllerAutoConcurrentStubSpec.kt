@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import tech.antibytes.kmock.KMockExperimental
 import tech.antibytes.kmock.MockShared
 import tech.antibytes.kmock.example.contract.AliasMock
 import tech.antibytes.kmock.example.contract.ConcurrentCollisionContract
@@ -210,6 +211,7 @@ class SampleControllerAutoConcurrentStubSpec {
         }
     }
 
+    @OptIn(KMockExperimental::class)
     @Test
     fun `Given a arbitrary SourceSetThing it is mocked`() {
         // Given
@@ -222,6 +224,7 @@ class SampleControllerAutoConcurrentStubSpec {
         concurrentThing._doSomething.assertHasBeenCalled(1)
     }
 
+    @OptIn(KMockExperimental::class)
     @Test
     fun `Given a arbitrary SourceSetThing with an SourceSet it is mocked`() {
         // Given
@@ -234,6 +237,7 @@ class SampleControllerAutoConcurrentStubSpec {
         concurrentThing._doSomething.assertHasBeenCalled(1)
     }
 
+    @OptIn(KMockExperimental::class)
     @Test
     fun `Given a arbitrary GenericThing it is mocked`() {
         // Given

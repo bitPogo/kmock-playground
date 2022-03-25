@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import platform.Foundation.NSData
 import platform.Foundation.create
+import tech.antibytes.kmock.KMockExperimental
 import tech.antibytes.kmock.MockShared
 import tech.antibytes.kmock.example.SampleController
 import tech.antibytes.kmock.example.contract.ExampleContract.SampleDomainObject
@@ -205,6 +206,7 @@ class SampleControllerAutoIosStubSpec {
         }
     }
 
+    @OptIn(KMockExperimental::class)
     @Test
     fun `Given a arbitrary SourceSetThing it is mocked`() {
         // Given

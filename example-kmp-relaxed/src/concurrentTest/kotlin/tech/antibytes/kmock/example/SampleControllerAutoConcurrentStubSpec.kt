@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import tech.antibytes.kmock.KMockExperimental
 import tech.antibytes.kmock.MockShared
 import tech.antibytes.kmock.example.contract.ConcurrentContract
 import tech.antibytes.kmock.example.contract.ConcurrentThingMock
@@ -195,6 +196,7 @@ class SampleControllerAutoConcurrentStubSpec {
         }
     }
 
+    @OptIn(KMockExperimental::class)
     @Test
     fun `Given a arbitrary SourceSetThing it is mocked`() {
         // Given
