@@ -15,7 +15,6 @@ plugins {
     id("com.android.library")
 
     id("tech.antibytes.gradle.configuration")
-    id("tech.antibytes.gradle.coverage")
 
     id("tech.antibytes.kmock.kmock-gradle") apply false
 }
@@ -42,6 +41,12 @@ kotlin {
                 "androidTestFixturesDebug",
                 "androidTestFixturesRelease",
             ).contains(sourceSet.name)
+        }
+
+        all {
+            languageSettings.apply {
+                optIn("kotlin.RequiresOptIn")
+            }
         }
 
         val commonMain by getting {
@@ -186,6 +191,9 @@ plugins.apply("tech.antibytes.kmock.kmock-gradle")
 
 project.extensions.configure<KMockExtension>("kmock") {
     rootPackage = "tech.antibytes.kmock.example"
+    spyOn = setOf(
+        "tech.antibytes.kmock.example.contract.ExampleContract.SampleDomainObject"
+    )
     aliasNameMapping = mapOf(
         "tech.antibytes.kmock.example.contract.ConcurrentCollisionContract.ConcurrentThing" to "Alias",
         "tech.antibytes.kmock.example.contract.ConcurrentCollisionContract.SomethingGenericConcurrent" to "AliasGeneric"

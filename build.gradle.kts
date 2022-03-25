@@ -20,9 +20,19 @@ plugins {
 allprojects {
     repositories {
         addCustomRepositories()
+        repositories {
+            maven {
+                url = uri("https://maven.pkg.github.com/bitPogo/kmock")
+                credentials {
+                    username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_UPLOAD_USERNAME").toString()
+                    password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_TOKEN").toString()
+                }
+            }
+        }
+
         mavenCentral()
         google()
-        jcenter()
+        jcenter() // nodejs
     }
 
     configurations.all {
