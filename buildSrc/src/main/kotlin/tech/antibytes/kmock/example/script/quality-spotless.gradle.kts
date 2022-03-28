@@ -6,7 +6,6 @@
 
 package tech.antibytes.kmock.example.script
 
-import gradle.kotlin.dsl.accessors._997edd13e5532639086acb03fd86a437.spotless
 import tech.antibytes.gradle.dependency.Version
 
 /**
@@ -29,10 +28,10 @@ import tech.antibytes.gradle.dependency.Version
  *     gradlePluginPortal()
  * }
  *
- * Now just add id("tech.antibytes.gradle.test.script.quality-spotless") to your rootProject build.gradle.kts plugins
+ * Now just add id("tech.antibytes.kmock.example.script.quality-spotless") to your rootProject build.gradle.kts plugins
  *
  * plugins {
- *     id("tech.antibytes.gradle.test.script.quality-spotless")
+ *     id("tech.antibytes.kmock.example.quality-spotless")
  * }
  */
 // TODO Integrade with dependency Plugin

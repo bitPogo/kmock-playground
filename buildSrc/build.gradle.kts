@@ -18,13 +18,11 @@ repositories {
     mavenCentral()
     google()
     addCustomRepositories()
-    repositories {
-        maven {
-            url = uri("https://maven.pkg.github.com/bitPogo/kmock")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_TOKEN")
-            }
+    maven {
+        url = uri("https://maven.pkg.github.com/bitPogo/kmock")
+        credentials {
+            username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_UPLOAD_USERNAME").toString()
+            password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_TOKEN").toString()
         }
     }
 }
