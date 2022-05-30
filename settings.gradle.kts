@@ -24,6 +24,7 @@ include(
     ":example-jvm",
     ":example-kmp",
     ":example-kmp-relaxed",
+    ":example-experimental-kmp",
 )
 
 buildCache {

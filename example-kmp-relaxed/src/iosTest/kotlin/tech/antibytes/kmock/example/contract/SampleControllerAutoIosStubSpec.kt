@@ -23,19 +23,12 @@ import tech.antibytes.kmock.example.contract.ExampleContract.SampleLocalReposito
 import tech.antibytes.kmock.example.contract.ExampleContract.SampleRemoteRepository
 import tech.antibytes.kmock.example.kmock
 import tech.antibytes.kmock.example.kspy
-import tech.antibytes.kmock.verification.NonfreezingVerifier
+import tech.antibytes.kmock.verification.NonFreezingVerifier
 import tech.antibytes.kmock.verification.Verifier
-import tech.antibytes.kmock.verification.assertHasBeenCalled
-import tech.antibytes.kmock.verification.hasBeenCalled
-import tech.antibytes.kmock.verification.hasBeenCalledWith
-import tech.antibytes.kmock.verification.hasBeenCalledWithout
-import tech.antibytes.kmock.verification.hasBeenStrictlyCalledWith
+import tech.antibytes.kmock.verification.assertProxy
 import tech.antibytes.kmock.verification.verify
 import tech.antibytes.kmock.verification.verifyOrder
 import tech.antibytes.kmock.verification.verifyStrictOrder
-import tech.antibytes.kmock.verification.wasGotten
-import tech.antibytes.kmock.verification.wasSet
-import tech.antibytes.kmock.verification.wasSetTo
 import tech.antibytes.util.test.coroutine.AsyncTestReturnValue
 import tech.antibytes.util.test.coroutine.clearBlockingTest
 import tech.antibytes.util.test.coroutine.defaultTestContext
@@ -169,7 +162,7 @@ class SampleControllerAutoIosStubSpec {
         // Given
         val idOrg = fixture.fixture<String>()
         val instance = DomainObject("test", 21)
-        val verifier = NonfreezingVerifier()
+        val verifier = NonFreezingVerifier()
         val local: SampleLocalRepositoryMock = kmock(verifier, relaxed = true, freeze = false)
         val remote: SampleRemoteRepositoryMock = kmock(verifier, relaxed = true, freeze = false)
 
@@ -223,7 +216,7 @@ class SampleControllerAutoIosStubSpec {
         iosThing.doSomething()
 
         // Then
-        iosThing._doSomething.assertHasBeenCalled(1)
+        assertProxy { iosThing._doSomething.hasBeenCalled() }
     }
 
     private class DomainObject(
