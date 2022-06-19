@@ -20,14 +20,6 @@ plugins {
 allprojects {
     repositories {
         addCustomRepositories()
-        maven {
-            url = uri("https://maven.pkg.github.com/bitPogo/kmock")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_UPLOAD_USERNAME").toString()
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_TOKEN").toString()
-            }
-        }
-
         mavenCentral()
         google()
         jcenter() // nodejs
@@ -49,6 +41,6 @@ allprojects {
 }
 
 tasks.named<Wrapper>("wrapper") {
-    gradleVersion = "7.4.1"
+    gradleVersion = "7.4.2"
     distributionType = Wrapper.DistributionType.ALL
 }

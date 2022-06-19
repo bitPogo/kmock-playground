@@ -26,7 +26,7 @@ val githubGroups = listOf(
 val repositories = listOf(
     CustomRepository(
         "https://raw.github.com/bitPogo/maven-dev/main/dev",
-        githubGroups,
+        githubGroups.toMutableList(),
     ),
     CustomRepository(
         "https://raw.github.com/bitPogo/maven-snapshots/main/snapshots",

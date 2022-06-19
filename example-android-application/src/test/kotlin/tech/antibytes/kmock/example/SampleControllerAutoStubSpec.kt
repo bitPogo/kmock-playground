@@ -12,6 +12,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.junit.Before
 import org.junit.Test
+import tech.antibytes.kfixture.fixture
+import tech.antibytes.kfixture.kotlinFixture
+import tech.antibytes.kfixture.listFixture
 import tech.antibytes.kmock.Mock
 import tech.antibytes.kmock.example.contract.ExampleContract
 import tech.antibytes.kmock.example.contract.ExampleContract.SampleDomainObject
@@ -29,9 +32,6 @@ import tech.antibytes.util.test.coroutine.clearBlockingTest
 import tech.antibytes.util.test.coroutine.defaultTestContext
 import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeout
 import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeoutInScope
-import tech.antibytes.util.test.fixture.fixture
-import tech.antibytes.util.test.fixture.kotlinFixture
-import tech.antibytes.util.test.fixture.listFixture
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
 import java.util.concurrent.atomic.AtomicReference
@@ -69,8 +69,8 @@ class SampleControllerAutoStubSpec {
         val id = fixture.listFixture<String>(size = 2)
         val number = fixture.fixture<Int>()
 
-        domainObject._id.getMany = id
-        domainObject._value.get = number
+        domainObject._id.getValues = id
+        domainObject._value.getValue = number
 
         remote._fetch.returnValue = domainObject
         local._store.returnValue = domainObject
@@ -110,8 +110,8 @@ class SampleControllerAutoStubSpec {
         val id = fixture.fixture<String>()
         val number = fixture.fixture<Int>()
 
-        domainObject._id.get = id
-        domainObject._value.get = number
+        domainObject._id.getValue = id
+        domainObject._value.getValue = number
 
         remote._find.returnValue = domainObject
         local._contains.sideEffect = { true }

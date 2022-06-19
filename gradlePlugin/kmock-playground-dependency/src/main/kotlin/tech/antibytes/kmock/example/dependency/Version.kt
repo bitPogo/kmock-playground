@@ -14,7 +14,7 @@ object Version {
         /**
          * [AnitBytes GradlePlugins](https://github.com/bitPogo/gradle-plugins)
          */
-        const val antibytes = "558fe4c"
+        const val antibytes = "b1a580e"
 
         /**
          * [Spotless](https://plugins.gradle.org/plugin/com.diffplug.gradle.spotless)
@@ -25,11 +25,16 @@ object Version {
     val antibytes = Antibytes
 
     object Antibytes {
-        const val test = "3948768"
+        const val test = "98f5a1d"
 
         /**
          * [KMock](https://github.com/bitPogo/kmock)
          */
-        const val kmock = "0.2.0-rc01"
+        const val kmock = "0.2.1"
+
+        /**
+         * [KFixture](https://github.com/bitPogo/kfixture)
+         */
+        const val kfixture = "0.1.0"
     }
 }
