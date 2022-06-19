@@ -15,6 +15,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import platform.Foundation.NSData
 import platform.Foundation.create
+import tech.antibytes.kfixture.fixture
+import tech.antibytes.kfixture.kotlinFixture
+import tech.antibytes.kfixture.listFixture
 import tech.antibytes.kmock.KMock
 import tech.antibytes.kmock.KMockExperimental
 import tech.antibytes.kmock.example.SampleController
@@ -37,9 +40,6 @@ import tech.antibytes.util.test.coroutine.clearBlockingTest
 import tech.antibytes.util.test.coroutine.defaultTestContext
 import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeout
 import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeoutInScope
-import tech.antibytes.util.test.fixture.fixture
-import tech.antibytes.util.test.fixture.kotlinFixture
-import tech.antibytes.util.test.fixture.listFixture
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
 import kotlin.test.BeforeTest
@@ -82,8 +82,8 @@ class SampleControllerAutoIosStubSpec {
         val id = fixture.listFixture<String>(size = 2)
         val number = fixture.fixture<Int>()
 
-        domainObject.propertyProxyOf(domainObject::id).getMany = id
-        domainObject.propertyProxyOf(domainObject::value).get = number
+        domainObject.propertyProxyOf(domainObject::id).getValues = id
+        domainObject.propertyProxyOf(domainObject::value).getValue = number
 
         remote.asyncFunProxyOf(remote::fetch).returnValue = domainObject
         local.asyncFunProxyOf(local::store).returnValue = domainObject
@@ -123,8 +123,8 @@ class SampleControllerAutoIosStubSpec {
         val id = fixture.fixture<String>()
         val number = fixture.fixture<Int>()
 
-        domainObject.propertyProxyOf(domainObject::id).get = id
-        domainObject.propertyProxyOf(domainObject::value).get = number
+        domainObject.propertyProxyOf(domainObject::id).getValue = id
+        domainObject.propertyProxyOf(domainObject::value).getValue = number
 
         remote.syncFunProxyOf(remote::find).returnValue = domainObject
         local.syncFunProxyOf(local::contains).sideEffect = { true }

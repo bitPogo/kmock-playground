@@ -5,9 +5,9 @@
  */
 package tech.antibytes.kmock.example
 
+import tech.antibytes.kfixture.fixture
+import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.kmock.Relaxer
-import tech.antibytes.util.test.fixture.fixture
-import tech.antibytes.util.test.fixture.kotlinFixture
 import kotlin.native.concurrent.ThreadLocal
 
 @ThreadLocal

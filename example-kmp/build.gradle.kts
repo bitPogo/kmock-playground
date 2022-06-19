@@ -16,7 +16,7 @@ plugins {
 
     id("tech.antibytes.gradle.configuration")
 
-    id("tech.antibytes.kmock.kmock-gradle") apply false
+    id("tech.antibytes.kmock.kmock-gradle")
 }
 
 kotlin {
@@ -172,9 +172,7 @@ kotlin {
     }
 }
 
-plugins.apply("tech.antibytes.kmock.kmock-gradle")
-
-project.extensions.configure<KMockExtension>("kmock") {
+kmock {
     rootPackage = "tech.antibytes.kmock.example"
     spyOn = setOf(
         "tech.antibytes.kmock.example.contract.ExampleContract.SampleDomainObject"

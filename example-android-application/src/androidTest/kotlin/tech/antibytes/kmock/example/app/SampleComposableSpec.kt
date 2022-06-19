@@ -15,10 +15,10 @@ import kotlinx.coroutines.flow.update
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import tech.antibytes.kfixture.fixture
+import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.kmock.Mock
 import tech.antibytes.kmock.example.kmock
-import tech.antibytes.util.test.fixture.fixture
-import tech.antibytes.util.test.fixture.kotlinFixture
 
 @Mock(AppContract.SampleViewModel::class)
 class SampleComposableSpec {
@@ -41,7 +41,7 @@ class SampleComposableSpec {
 
         flow.update { value }
 
-        viewModel.flowProp.get = flow
+        viewModel.flowProp.getValue = flow
 
         // When
         composeTestRule.setContent {
@@ -59,7 +59,7 @@ class SampleComposableSpec {
         // Given
         val value: String = fixture.fixture()
 
-        viewModel.flowProp.get = flow
+        viewModel.flowProp.getValue = flow
         viewModel.doSomethingFun.sideEffect = {
             flow.tryEmit(value)
             Unit
