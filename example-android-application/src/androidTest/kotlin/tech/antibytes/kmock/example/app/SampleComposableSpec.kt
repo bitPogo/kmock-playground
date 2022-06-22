@@ -41,7 +41,7 @@ class SampleComposableSpec {
 
         flow.update { value }
 
-        viewModel.flowProp.getValue = flow
+        viewModel._flow.getValue = flow
 
         // When
         composeTestRule.setContent {
@@ -59,8 +59,8 @@ class SampleComposableSpec {
         // Given
         val value: String = fixture.fixture()
 
-        viewModel.flowProp.getValue = flow
-        viewModel.doSomethingFun.sideEffect = {
+        viewModel._flow.getValue = flow
+        viewModel._doSomething.sideEffect = {
             flow.tryEmit(value)
             Unit
         }
