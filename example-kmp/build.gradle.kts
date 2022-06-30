@@ -82,7 +82,6 @@ kotlin {
         val androidTestFixturesDebug by getting
         val androidTestFixturesRelease by getting
         val androidTest by getting {
-            dependsOn(androidAndroidTestRelease)
             dependsOn(androidTestFixtures)
             dependsOn(androidTestFixturesDebug)
             dependsOn(androidTestFixturesRelease)
@@ -92,6 +91,19 @@ kotlin {
                 implementation(Dependency.multiplatform.test.jvm)
                 implementation(Dependency.multiplatform.test.junit)
                 implementation(Dependency.android.test.robolectric)
+            }
+        }
+
+        val androidAndroidTest by getting {
+            dependsOn(concurrentTest)
+            dependsOn(androidAndroidTestRelease)
+
+            dependencies {
+                implementation(Dependency.jvm.test.junit)
+                implementation(Dependency.android.test.junit)
+                implementation(Dependency.android.test.composeJunit4)
+                implementation(Dependency.android.test.espressoCore)
+                implementation(Dependency.android.test.uiAutomator)
             }
         }
 
@@ -172,6 +184,35 @@ kotlin {
     }
 }
 
+android {
+    defaultConfig {
+        minSdk = 30
+    }
+
+    sourceSets {
+        val androidTest = getByName("androidTest")
+        androidTest.java.setSrcDirs(setOf("src/androidAndroidTest/kotlin"))
+        androidTest.res.setSrcDirs(setOf("src/androidAndroidTest/res"))
+    }
+
+    packagingOptions {
+        resources.excludes.addAll(
+            setOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE.txt",
+                "META-INF/license.txt",
+                "META-INF/LICENSE-notice.md",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/notice.txt",
+                "META-INF/ASL2.0"
+            )
+        )
+    }
+}
+
 kmock {
     rootPackage = "tech.antibytes.kmock.example"
     spyOn = setOf(
@@ -182,3 +223,4 @@ kmock {
         "tech.antibytes.kmock.example.contract.ConcurrentCollisionContract.SomethingGenericConcurrent" to "AliasGeneric"
     )
 }
+

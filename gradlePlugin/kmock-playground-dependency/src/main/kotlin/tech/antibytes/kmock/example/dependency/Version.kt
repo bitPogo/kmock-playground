@@ -30,7 +30,7 @@ object Version {
         /**
          * [KMock](https://github.com/bitPogo/kmock)
          */
-        const val kmock = "0.3.0-rc01"
+        const val kmock = "0.3.0-rc01-fix-android-flakyness-SNAPSHOT"
 
         /**
          * [KFixture](https://github.com/bitPogo/kfixture)
