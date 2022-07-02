@@ -16,6 +16,7 @@ import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.kfixture.listFixture
 import tech.antibytes.kmock.KMock
 import tech.antibytes.kmock.KMockExperimental
+import tech.antibytes.kmock.MultiMockCommon
 import tech.antibytes.kmock.example.contract.ExampleContract
 import tech.antibytes.kmock.example.contract.ExampleContract.SampleDomainObject
 import tech.antibytes.kmock.example.contract.ExampleContract.SampleLocalRepository
@@ -49,12 +50,18 @@ import kotlin.test.Test
     SampleDomainObject::class,
     ExampleContract.DecoderFactory::class
 )
+@MultiMockCommon(
+    name = "RemoteDecoderRepository",
+    SampleRemoteRepository::class,
+    ExampleContract.DecoderFactory::class
+)
 class SampleControllerAutoStubSpec {
     private val fixture = kotlinFixture()
     private var verifier = Verifier()
     private var local: SampleLocalRepositoryMock = kmock(verifier)
     private var remote: SampleRemoteRepositoryMock = kmock(verifier)
     private var domainObject: SampleDomainObjectMock = kmock(verifier)
+    private val remoteDecoder: RemoteDecoderRepositoryMock<*> = kmock()
 
     @BeforeTest
     fun setUp() {

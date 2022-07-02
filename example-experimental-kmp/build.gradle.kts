@@ -177,5 +177,8 @@ kmock {
         "tech.antibytes.kmock.example.contract.ConcurrentCollisionContract.ConcurrentThing" to "Alias",
         "tech.antibytes.kmock.example.contract.ConcurrentCollisionContract.SomethingGenericConcurrent" to "AliasGeneric"
     )
+    preventResolvingOfAliases = setOf(
+        "tech.antibytes.kmock.example.contract.PlatformDecoder"
+    )
     allowExperimentalProxyAccess = true
 }
