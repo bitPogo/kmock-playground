@@ -6,6 +6,7 @@
 
 package tech.antibytes.kmock.example
 
+import java.util.concurrent.atomic.AtomicReference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
@@ -34,12 +35,11 @@ import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeout
 import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeoutInScope
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import java.util.concurrent.atomic.AtomicReference
 
 @Mock(
     SampleRemoteRepository::class,
     SampleLocalRepository::class,
-    SampleDomainObject::class,
+    SampleDomainObject::class
 )
 class SampleControllerAutoStubSpec {
     private val fixture = kotlinFixture()

@@ -7,6 +7,8 @@
 package tech.antibytes.kmock.example.contract
 
 import co.touchlab.stately.concurrency.AtomicReference
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 import kotlinx.cinterop.allocArrayOf
 import kotlinx.cinterop.memScoped
 import kotlinx.coroutines.CoroutineScope
@@ -38,8 +40,6 @@ import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeout
 import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeoutInScope
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import kotlin.test.BeforeTest
-import kotlin.test.Test
 
 @MockShared(
     "iosTest",

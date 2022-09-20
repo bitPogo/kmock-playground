@@ -4,9 +4,9 @@
  * Use of this source code is governed by Apache v2.0
  */
 
+import tech.antibytes.gradle.configuration.ensureIosDeviceCompatibility
 import tech.antibytes.gradle.dependency.Dependency
 import tech.antibytes.kmock.example.dependency.Dependency as LocalDependency
-import tech.antibytes.gradle.kmock.KMockExtension
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
@@ -19,6 +19,8 @@ plugins {
     id("tech.antibytes.kmock.kmock-gradle")
 }
 
+val isIDEA = System.getProperty("idea.fatal.error.notification") != null
+
 kotlin {
     android()
 
@@ -30,6 +32,8 @@ kotlin {
     jvm()
 
     ios()
+    iosSimulatorArm64()
+    ensureIosDeviceCompatibility()
 
     linuxX64()
 
@@ -77,15 +81,32 @@ kotlin {
                 implementation(Dependency.multiplatform.kotlin.android)
             }
         }
-        val androidAndroidTestRelease by getting
-        val androidTestFixtures by getting
-        val androidTestFixturesDebug by getting
-        val androidTestFixturesRelease by getting
+        if (!isIDEA) {
+            val androidAndroidTestRelease by getting {
+                dependsOn(concurrentTest)
+            }
+            val androidAndroidTest by getting {
+                dependsOn(concurrentTest)
+                dependsOn(androidAndroidTestRelease)
+            }
+            val androidTestFixturesDebug by getting {
+                dependsOn(concurrentTest)
+            }
+            val androidTestFixturesRelease by getting {
+                dependsOn(concurrentTest)
+            }
+
+            val androidTestFixtures by getting {
+                dependsOn(concurrentTest)
+                dependsOn(androidTestFixturesDebug)
+                dependsOn(androidTestFixturesRelease)
+            }
+
+            val androidTest by getting {
+                dependsOn(androidTestFixtures)
+            }
+        }
         val androidTest by getting {
-            dependsOn(androidAndroidTestRelease)
-            dependsOn(androidTestFixtures)
-            dependsOn(androidTestFixturesDebug)
-            dependsOn(androidTestFixturesRelease)
             dependsOn(concurrentTest)
 
             dependencies {
@@ -166,7 +187,10 @@ kotlin {
             dependsOn(darwinTest)
         }
 
-        val iosX64Test by getting {
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosSimulatorArm64Test by getting {
             dependsOn(iosTest)
         }
     }

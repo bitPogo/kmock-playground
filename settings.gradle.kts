@@ -14,7 +14,7 @@ pluginManagement {
 includeBuild("gradlePlugin/kmock-playground-dependency")
 
 plugins {
-    id("com.gradle.enterprise") version("3.7")
+    id("com.gradle.enterprise") version("3.11.1")
 }
 
 include(
@@ -24,7 +24,7 @@ include(
     ":example-jvm",
     ":example-kmp",
     ":example-kmp-relaxed",
-    ":example-experimental-kmp",
+    ":example-experimental-kmp"
 )
 
 buildCache {

@@ -6,10 +6,10 @@
 
 package tech.antibytes.kmock.example.contract
 
+import kotlin.test.Test
 import tech.antibytes.kmock.KMock
 import tech.antibytes.kmock.KMockExperimental
 import tech.antibytes.util.test.fulfils
-import kotlin.test.Test
 
 @OptIn(KMockExperimental::class)
 @KMock(ExampleContractJs.JsDecoder::class)
