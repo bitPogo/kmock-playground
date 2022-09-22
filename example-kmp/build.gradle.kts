@@ -5,6 +5,7 @@
  */
 
 import tech.antibytes.gradle.configuration.ensureIosDeviceCompatibility
+import tech.antibytes.gradle.configuration.isIdea
 import tech.antibytes.gradle.dependency.Dependency
 import tech.antibytes.kmock.example.dependency.Dependency as LocalDependency
 
@@ -18,8 +19,6 @@ plugins {
 
     id("tech.antibytes.kmock.kmock-gradle")
 }
-
-val isIDEA = System.getProperty("idea.fatal.error.notification") != null
 
 kotlin {
     android()
@@ -81,7 +80,7 @@ kotlin {
                 implementation(Dependency.multiplatform.kotlin.android)
             }
         }
-        if (!isIDEA) {
+        if (!isIdea()) {
             val androidAndroidTestRelease by getting {
                 dependsOn(concurrentTest)
             }

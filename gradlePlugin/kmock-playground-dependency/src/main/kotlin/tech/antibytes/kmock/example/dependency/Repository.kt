@@ -31,6 +31,10 @@ val repositories = listOf(
     CustomRepository(
         "https://raw.github.com/bitPogo/maven-snapshots/main/snapshots",
         githubGroups.toMutableList().also { it.add("tech.antibytes.kmock") }
+    ),
+    CustomRepository(
+        "https://raw.github.com/bitPogo/maven-rolling-releases/main/rolling",
+        githubGroups
     )
 )
 
