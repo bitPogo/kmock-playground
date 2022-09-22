@@ -7,6 +7,8 @@
 package tech.antibytes.kmock.example
 
 import co.touchlab.stately.concurrency.AtomicReference
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
@@ -44,8 +46,6 @@ import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeout
 import tech.antibytes.util.test.coroutine.runBlockingTestWithTimeoutInScope
 import tech.antibytes.util.test.fulfils
 import tech.antibytes.util.test.mustBe
-import kotlin.test.BeforeTest
-import kotlin.test.Test
 
 @OptIn(KMockExperimental::class)
 @KMock(
@@ -56,7 +56,7 @@ import kotlin.test.Test
     ConcurrentContract.ConcurrentThing::class,
     ConcurrentCollisionContract.ConcurrentThing::class,
     ConcurrentContract.SomethingGenericConcurrent::class,
-    ConcurrentCollisionContract.SomethingGenericConcurrent::class,
+    ConcurrentCollisionContract.SomethingGenericConcurrent::class
 )
 class SampleControllerAutoConcurrentStubSpec {
     private val fixture = kotlinFixture()
@@ -240,7 +240,7 @@ class SampleControllerAutoConcurrentStubSpec {
         // Given
         val concurrentThing: SomethingGenericConcurrentMock<Int> = kmock(
             templateType = ConcurrentContract.SomethingGenericConcurrent::class,
-            relaxUnitFun = true,
+            relaxUnitFun = true
         )
 
         concurrentThing.syncFunProxyOf(concurrentThing::doSomething).returnValue = 23

@@ -42,10 +42,10 @@ plugins {
 spotless {
     kotlin {
         target("**/*.kt")
-        targetExclude("buildSrc/build/", "**/buildSrc/build/")
-        ktlint(Version.gradle.ktLint).userData(
+        targetExclude("**/build/", "**/buildSrc/build/")
+        ktlint(Version.gradle.ktLint).editorConfigOverride(
             mapOf(
-                "disabled_rules" to "no-wildcard-imports",
+                "ktlint_disabled_rules" to "no-wildcard-imports",
                 "ij_kotlin_imports_layout" to "*"
             )
         )

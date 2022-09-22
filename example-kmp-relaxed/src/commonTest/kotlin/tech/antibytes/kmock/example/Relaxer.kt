@@ -5,10 +5,10 @@
  */
 package tech.antibytes.kmock.example
 
+import kotlin.native.concurrent.ThreadLocal
 import tech.antibytes.kfixture.fixture
 import tech.antibytes.kfixture.kotlinFixture
 import tech.antibytes.kmock.Relaxer
-import kotlin.native.concurrent.ThreadLocal
 
 @ThreadLocal
 internal object Fixture {

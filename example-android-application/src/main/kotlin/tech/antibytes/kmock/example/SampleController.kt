@@ -6,13 +6,13 @@
 
 package tech.antibytes.kmock.example
 
+import java.util.concurrent.atomic.AtomicReference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import tech.antibytes.kmock.example.contract.ExampleContract
-import java.util.concurrent.atomic.AtomicReference
 
 class SampleController(
     private val localRepository: ExampleContract.SampleLocalRepository,
